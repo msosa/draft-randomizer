@@ -1,5 +1,9 @@
 <div>
   <div *ngFor="let user of users">
-    {{user.name}} {{user.id}}
+    <input [(ngModel)]=user.name />
+    <input [(ngModel)]=user.numberOfPicks />
+    {{user | json}}
   </div>
+  <button (click)="randomize()">Randomize</button>
+  {{users2 | json}}
 </div>

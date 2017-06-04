@@ -9,6 +9,7 @@ import { User } from '../user'
 export class DraftHomeComponent implements OnInit {
 
   users: User[];
+  users2: User[];
   constructor() { }
 
   ngOnInit() {
@@ -17,6 +18,15 @@ export class DraftHomeComponent implements OnInit {
       let user = new User("test" + i, i);
       this.users.push(user);
     }
+  }
+
+  randomize() {
+    this.users2 = [];
+    this.users.forEach(user => {
+      for (let i = 0; i < user.numberOfPicks; i++) {
+        this.users2.push(new User(user.name, 1, user.id));
+      }
+    });
   }
 
 }
