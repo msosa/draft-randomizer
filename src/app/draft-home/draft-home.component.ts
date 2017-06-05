@@ -8,31 +8,29 @@ import { User } from '../user'
 })
 export class DraftHomeComponent implements OnInit {
 
-  users: User[];
-  users2: User[];
+  users: User[] = [];
   draftOrder: User[];
   constructor() { }
 
   ngOnInit() {
-    this.users = [];
-    for (let i = 0; i < 6; i++) {
-      let user = new User("test" + i, i+1);
-      this.users.push(user);
-    }
+  }
+
+  addUser() {
+    this.users.push(new User("", null));
   }
 
   randomize() {
-    this.users2 = [];
+    let randomizedUsers = [];
     this.users.forEach(user => {
       for (let i = 0; i < user.numberOfPicks; i++) {
-        this.users2.push(new User(user.name, 1, user.id));
+        randomizedUsers.push(new User(user.name, 1, user.id));
       }
     });
-    this.users2 = this.shuffleArray(this.users2);
+    randomizedUsers = this.shuffleArray(randomizedUsers);
     this.draftOrder = [];
     while (this.draftOrder.length < this.users.length) {
-      let selectedUser = this.users2[Math.floor(Math.random() * this.users2.length)];
-      this.users2 = this.users2.filter(user => user.id !== selectedUser.id);
+      let selectedUser = randomizedUsers[Math.floor(Math.random() * randomizedUsers.length)];
+      randomizedUsers = randomizedUsers.filter(user => user.id !== selectedUser.id);
       this.draftOrder.push(selectedUser);
     }
   }

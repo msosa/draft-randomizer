@@ -4,10 +4,12 @@
     <input [(ngModel)]=user.numberOfPicks />
     {{user | json}}
   </div>
+  <button (click)="addUser()">Add Team</button>
   <button (click)="randomize()">Randomize</button>
-  {{users2 | json}}
   <div>
   draft order
-  {{draftOrder | json}}
+    <div *ngFor="let user of draftOrder">
+      {{user.name}}
+    </div>
   </div>
 </div>
